@@ -54,7 +54,7 @@ export interface ProviderConfig extends ContractInfo {
   bundlerUrl: string;
   factoryAddress: string;
   accountAddress?: string;
-  paymasterAPI?: PaymasterAPI;
+  paymasterAPI: PaymasterAPI;
   gasless?: boolean;
 }
 

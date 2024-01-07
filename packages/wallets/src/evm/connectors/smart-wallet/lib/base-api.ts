@@ -42,9 +42,9 @@ export type BatchData = {
 export interface BaseApiParams {
   provider: providers.Provider;
   entryPointAddress: string;
+  paymasterAPI: PaymasterAPI;
   accountAddress?: string;
   overheads?: Partial<GasOverheads>;
-  paymasterAPI?: PaymasterAPI;
   gasless?: boolean;
 }
 
@@ -76,7 +76,7 @@ export abstract class BaseAccountAPI {
   overheads?: Partial<GasOverheads>;
   entryPointAddress: string;
   accountAddress?: string;
-  paymasterAPI?: PaymasterAPI;
+  paymasterAPI: PaymasterAPI;
   gasless?: boolean;
 
   /**
@@ -344,7 +344,7 @@ export abstract class BaseAccountAPI {
     let userOp = partialUserOp;
 
     const gasless = config?.gasless !== undefined ? config.gasless : this.gasless;
-    if (gasless && this.paymasterAPI) {
+    if (gasless) {
       // fill (partial) preVerificationGas (all except the cost of the generated paymasterAndData)
       try {
         // userOp.preVerificationGas contains a promise that will resolve to an error.
